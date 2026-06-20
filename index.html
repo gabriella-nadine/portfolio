@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriella Nadine — Content Strategist & SEO Writer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blush:#FAD4E0;
+  --baby:#FDE8F0;
+  --cream:#FFF6F9;
+  --hot:#E0507A;
+  --rose:#C94870;
+  --dusty:#D4A0B4;
+  --dark:#2A1A20;
+  --mid:#7A4060;
+  --white:#FFFFFF;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* CURSOR */
+#cursor{
+  width:10px;height:10px;
+  background:var(--hot);
+  border-radius:50%;
+  position:fixed;pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .15s,height .15s;
+}
+#cursor-ring{
+  width:28px;height:28px;
+  border:1px solid var(--hot);
+  border-radius:50%;opacity:.5;
+  position:fixed;pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform .08s ease,opacity .2s;
+}
+.spark{
+  position:fixed;pointer-events:none;z-index:9997;
+  font-size:12px;line-height:1;
+  animation:spark-out .7s ease-out forwards;
+}
+@keyframes spark-out{
+  0%{opacity:1;transform:scale(1) translateY(0)}
+  100%{opacity:0;transform:scale(.4) translateY(-18px)}
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:20px 6%;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s ease,backdrop-filter .4s ease,border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(255,246,249,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-color:var(--blush);
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;letter-spacing:.05em;color:var(--dark)}
+.nav-logo span{color:var(--hot)}
+.nav-links{display:flex;gap:36px}
+.nav-links a{
+  font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mid);transition:color .2s;
+}
+.nav-links a:hover{color:var(--hot)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(150deg,#fff0f8 0%,#fad4e0 55%,#f5b4cc 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 6% 80px;
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 75% 15%,rgba(255,255,255,.45),transparent),
+    radial-gradient(ellipse 50% 50% at 25% 85%,rgba(224,80,122,.12),transparent);
+}
+
+/* Floating sparkles */
+.float-spark{
+  position:absolute;pointer-events:none;color:var(--hot);
+  font-size:14px;opacity:0;
+  animation:float-anim var(--dur,4s) var(--delay,0s) ease-in-out infinite;
+}
+@keyframes float-anim{
+  0%{opacity:0;transform:translateY(0) scale(.8)}
+  25%{opacity:.7}
+  75%{opacity:.5}
+  100%{opacity:0;transform:translateY(-40px) scale(1.2)}
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--hot);color:#fff;
+  font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 18px;border-radius:20px;
+  margin-bottom:36px;
+  position:relative;z-index:1;
+}
+.hero-badge-dot{
+  width:6px;height:6px;border-radius:50%;background:#fff;
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  font-size:clamp(64px,14vw,160px);
+  line-height:.88;
+  letter-spacing:-.02em;
+  background:linear-gradient(100deg,var(--dark) 0%,#e05078 38%,var(--dark) 55%,#e05078 78%,var(--dark) 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 5s linear infinite;
+  position:relative;z-index:1;
+}
+@keyframes shimmer{to{background-position:220% center}}
+
+.hero-surname{
+  font-family:'Playfair Display',serif;
+  font-weight:400;font-style:italic;
+  font-size:clamp(36px,8vw,100px);
+  color:var(--hot);line-height:1.05;
+  margin-bottom:28px;
+  position:relative;z-index:1;
+}
+
+.hero-script{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(20px,3.5vw,36px);
+  color:var(--mid);margin-bottom:8px;
+  position:relative;z-index:1;
+}
+
+.hero-sub{
+  font-size:14px;color:var(--mid);
+  max-width:460px;margin:0 auto 32px;
+  line-height:1.75;
+  position:relative;z-index:1;
+}
+
+.hero-pills{
+  display:flex;flex-wrap:wrap;gap:8px;
+  justify-content:center;margin-top:8px;
+  position:relative;z-index:1;
+}
+.hero-pill{
+  font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--mid);border:1px solid var(--dusty);
+  padding:7px 16px;border-radius:2px;
+  transition:border-color .2s,color .2s;
+}
+.hero-pill:hover{border-color:var(--hot);color:var(--hot)}
+
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dusty);z-index:1;
+}
+.scroll-line{
+  width:1px;height:36px;background:var(--dusty);
+  animation:line-breathe 1.8s ease-in-out infinite;
+}
+@keyframes line-breathe{
+  0%{opacity:0;transform:scaleY(0);transform-origin:top}
+  50%{opacity:1;transform:scaleY(1)}
+  100%{opacity:0;transform:scaleY(0);transform-origin:bottom}
+}
+
+/* TICKER */
+.ticker{
+  background:var(--hot);padding:13px 0;
+  overflow:hidden;white-space:nowrap;
+}
+.ticker-track{
+  display:inline-block;
+  animation:ticker-go 22s linear infinite;
+}
+.ticker-track span{
+  font-size:11px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:#fff;
+  margin:0 2px;
+}
+.ticker-sep{margin:0 22px!important;opacity:.5}
+@keyframes ticker-go{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTION SHELL */
+.section{padding:88px 6%}
+.section-label{
+  font-size:10px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--hot);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,44px);font-weight:700;
+  color:var(--dark);margin-bottom:48px;
+  line-height:1.2;
+}
+.pink-rule{
+  width:36px;height:2px;background:var(--hot);
+  margin-bottom:16px;
+}
+
+/* STATS */
+.stats-bg{background:var(--white)}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:20px;
+}
+.stat-card{
+  background:var(--baby);
+  padding:36px 20px;border-radius:3px;
+  text-align:center;position:relative;overflow:hidden;
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--hot);
+}
+.stat-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(224,80,122,.12)}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:50px;font-weight:900;
+  color:var(--hot);line-height:1;margin-bottom:10px;
+}
+.stat-desc{
+  font-size:11px;font-weight:500;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--mid);line-height:1.5;
+}
+.stat-source{
+  font-size:10px;color:var(--dusty);
+  margin-top:6px;font-style:italic;
+}
+
+/* EXPERIENCE */
+.exp-bg{background:var(--cream)}
+.exp-list{display:flex;flex-direction:column;gap:72px;margin-top:52px}
+.exp-row{
+  display:grid;grid-template-columns:220px 1fr;
+  gap:52px;align-items:start;
+}
+.exp-meta{position:sticky;top:100px}
+.exp-company{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:700;
+  color:var(--dark);margin-bottom:10px;line-height:1.2;
+}
+.exp-role{
+  font-size:11px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--hot);margin-bottom:6px;
+}
+.exp-dates{font-size:13px;color:var(--dusty);font-style:italic;margin-bottom:14px}
+.exp-tag{
+  display:inline-block;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--white);background:var(--dusty);
+  padding:4px 11px;border-radius:2px;
+}
+.exp-body{
+  border-left:2px solid var(--blush);
+  padding-left:36px;
+}
+.exp-lead{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-style:italic;
+  color:var(--mid);line-height:1.75;margin-bottom:24px;
+}
+.exp-points{display:flex;flex-direction:column;gap:12px}
+.exp-points li{
+  font-size:14px;color:var(--dark);
+  line-height:1.75;padding-left:22px;position:relative;
+}
+.exp-points li::before{
+  content:'✦';position:absolute;left:0;top:5px;
+  color:var(--hot);font-size:9px;
+}
+.exp-impact{
+  margin-top:24px;
+  background:var(--baby);
+  border-left:3px solid var(--hot);
+  padding:16px 20px;border-radius:0 3px 3px 0;
+}
+.exp-impact-label{
+  font-size:9px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--hot);margin-bottom:6px;
+}
+.exp-impact p{font-size:13px;color:var(--mid);line-height:1.65}
+
+/* TESTIMONIALS */
+.test-bg{
+  background:linear-gradient(135deg,var(--blush) 0%,#f5b4cc 100%);
+}
+.test-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;margin-top:52px;
+}
+.test-card{
+  background:var(--white);
+  padding:44px 32px 32px;border-radius:3px;
+  position:relative;
+  transition:transform .3s ease;
+}
+.test-card:hover{transform:translateY(-4px)}
+.test-card::before{
+  content:'\201C';
+  font-family:'Playfair Display',serif;
+  font-size:86px;line-height:1;
+  color:var(--blush);
+  position:absolute;top:8px;left:22px;
+}
+.test-quote{
+  font-family:'Playfair Display',serif;
+  font-size:15px;font-style:italic;
+  color:var(--dark);line-height:1.85;
+  margin-top:8px;
+}
+.test-author{
+  margin-top:20px;
+  font-size:11px;font-weight:500;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--hot);
+}
+
+/* EDITORIAL WORK */
+.editorial-bg{background:var(--white)}
+.editorial-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;margin-top:52px;
+}
+.ed-card{
+  padding:32px;border:1px solid var(--blush);
+  border-radius:3px;
+  transition:border-color .25s,background .25s;
+}
+.ed-card:hover{border-color:var(--hot);background:var(--baby)}
+.ed-type{
+  font-size:9px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--hot);margin-bottom:16px;
+}
+.ed-title{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:700;
+  color:var(--dark);margin-bottom:14px;
+}
+.ed-items{display:flex;flex-direction:column;gap:9px}
+.ed-items li{
+  font-size:13px;color:var(--mid);
+  padding-left:16px;position:relative;line-height:1.5;
+}
+.ed-items li::before{
+  content:'—';position:absolute;left:0;color:var(--dusty);
+}
+.ed-items a{
+  color:var(--mid);
+  text-decoration:underline;
+  text-decoration-color:var(--dusty);
+  text-underline-offset:3px;
+  transition:color .2s,text-decoration-color .2s;
+}
+.ed-items a:hover{color:var(--hot);text-decoration-color:var(--hot)}
+.ed-view-all{
+  display:inline-block;margin-top:18px;
+  font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--hot);border-bottom:1px solid var(--dusty);padding-bottom:2px;
+  transition:border-color .2s;
+}
+.ed-view-all:hover{border-color:var(--hot)}
+.test-links{
+  display:flex;flex-wrap:wrap;gap:12px;
+  margin-top:36px;justify-content:center;
+}
+.test-link-btn{
+  font-size:11px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--hot);border:1px solid var(--dusty);
+  padding:10px 22px;border-radius:2px;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.test-link-btn:hover{background:var(--hot);border-color:var(--hot);color:#fff}
+
+/* ACCOLADES */
+.accolade-bg{
+  background:var(--baby);
+  padding:56px 6%;text-align:center;
+}
+.accolade-pills{
+  display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;margin-top:32px;
+}
+.accolade-pill{
+  font-size:12px;font-weight:400;
+  color:var(--mid);border:1px solid var(--dusty);
+  padding:9px 20px;border-radius:20px;
+  transition:background .2s,color .2s;
+}
+.accolade-pill:hover{background:var(--hot);border-color:var(--hot);color:#fff}
+
+/* CONTACT */
+.contact-bg{
+  background:var(--dark);padding:100px 6%;text-align:center;
+}
+.contact-script{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(28px,5vw,52px);
+  color:var(--blush);margin-bottom:12px;
+}
+.contact-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,5vw,54px);
+  font-weight:900;color:var(--white);
+  margin-bottom:20px;line-height:1.1;
+}
+.contact-sub{
+  font-size:15px;color:var(--dusty);
+  max-width:420px;margin:0 auto 52px;
+  line-height:1.75;
+}
+.contact-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--white);border:1px solid var(--dusty);
+  padding:15px 32px;border-radius:2px;
+  transition:background .25s,border-color .25s;
+  cursor:none;
+}
+.contact-btn:hover,.contact-btn.primary{background:var(--hot);border-color:var(--hot)}
+.contact-btn.primary{background:var(--hot);border-color:var(--hot)}
+
+.footer-note{
+  margin-top:64px;
+  font-size:11px;color:var(--dusty);opacity:.5;
+  letter-spacing:.08em;
+}
+
+/* PARALLAX & REVEAL */
+.hero-content{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+  will-change:transform;
+}
+.hero-glow{will-change:transform}
+.float-spark{will-change:transform}
+
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
+}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}
+.reveal-d2{transition-delay:.16s}
+.reveal-d3{transition-delay:.24s}
+.reveal-d4{transition-delay:.32s}
+.reveal-d5{transition-delay:.40s}
+
+.parallax-title{will-change:transform}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .exp-row{grid-template-columns:1fr}
+  .exp-meta{position:static}
+  .nav-links{display:none}
+  .exp-body{padding-left:20px}
+}
+@media(max-width:480px){
+  .section{padding:64px 5%}
+  .hero{padding:90px 5% 70px}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Gabriella <span>Nadine</span></div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#testimonials">Praise</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+
+  <!-- floating sparkles -->
+  <span class="float-spark" style="top:18%;left:10%;--dur:5s;--delay:0s">✦</span>
+  <span class="float-spark" style="top:30%;right:8%;--dur:4.5s;--delay:.8s">✦</span>
+  <span class="float-spark" style="top:65%;left:7%;--dur:6s;--delay:1.2s">✦</span>
+  <span class="float-spark" style="top:55%;right:10%;--dur:5.5s;--delay:.3s">✦</span>
+  <span class="float-spark" style="top:80%;left:22%;--dur:4.8s;--delay:1.5s">✦</span>
+  <span class="float-spark" style="top:20%;right:22%;--dur:5.2s;--delay:.6s">✦</span>
+
+  <div class="hero-content" id="heroContent">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Available for new roles
+    </div>
+
+    <h1 class="hero-name">GABRIELLA</h1>
+    <p class="hero-surname">Nadine.</p>
+
+    <p class="hero-script">Content Strategist &amp; SEO Writer</p>
+    <p class="hero-sub">Performance-driven storyteller with agency and in-house experience across telco, finance, and lifestyle sectors. I make content that ranks, converts, and actually gets read.</p>
+
+    <div class="hero-pills">
+      <span class="hero-pill">SEO</span>
+      <span class="hero-pill">Editorial</span>
+      <span class="hero-pill">Brand Voice</span>
+      <span class="hero-pill">Campaign Performance</span>
+      <span class="hero-pill">Content Strategy</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    scroll
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>SEO Content</span><span class="ticker-sep">✦</span>
+    <span>Editorial Writing</span><span class="ticker-sep">✦</span>
+    <span>Brand Storytelling</span><span class="ticker-sep">✦</span>
+    <span>Campaign Strategy</span><span class="ticker-sep">✦</span>
+    <span>Keyword Research</span><span class="ticker-sep">✦</span>
+    <span>CMS &amp; Publishing</span><span class="ticker-sep">✦</span>
+    <span>Email Marketing</span><span class="ticker-sep">✦</span>
+    <span>Content Strategy</span><span class="ticker-sep">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>SEO Content</span><span class="ticker-sep">✦</span>
+    <span>Editorial Writing</span><span class="ticker-sep">✦</span>
+    <span>Brand Storytelling</span><span class="ticker-sep">✦</span>
+    <span>Campaign Strategy</span><span class="ticker-sep">✦</span>
+    <span>Keyword Research</span><span class="ticker-sep">✦</span>
+    <span>CMS &amp; Publishing</span><span class="ticker-sep">✦</span>
+    <span>Email Marketing</span><span class="ticker-sep">✦</span>
+    <span>Content Strategy</span><span class="ticker-sep">✦</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="section stats-bg" id="stats">
+  <div class="pink-rule"></div>
+  <div class="section-label">Selected Proof Points</div>
+  <div class="section-title">Numbers that matter.</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">30%</div>
+      <div class="stat-desc">Organic Traffic Growth</div>
+      <div class="stat-source">Multinational client · First Page Digital</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">25%</div>
+      <div class="stat-desc">Website Traffic Increase</div>
+      <div class="stat-source">Singtel · 12 months</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">20%</div>
+      <div class="stat-desc">Search Ranking Improvement</div>
+      <div class="stat-source">Singtel · priority pages</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">60%</div>
+      <div class="stat-desc">Engagement Uplift</div>
+      <div class="stat-source">Singapore Swimming Club</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7%</div>
+      <div class="stat-desc">Sales Uplift</div>
+      <div class="stat-source">Singtel · content-attributed</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section exp-bg" id="work">
+  <div class="pink-rule"></div>
+  <div class="section-label">Experience</div>
+  <div class="section-title">Where I've worked,<br><em style="font-style:italic;font-weight:400">and what I built.</em></div>
+
+  <div class="exp-list">
+
+    <!-- First Page Digital -->
+    <div class="exp-row">
+      <div class="exp-meta">
+        <div class="exp-company">First Page Digital</div>
+        <div class="exp-role">Content Marketer</div>
+        <div class="exp-dates">Apr 2025 – Dec 2025</div>
+        <span class="exp-tag">Agency · SEO</span>
+      </div>
+      <div class="exp-body">
+        <p class="exp-lead">High-volume SEO content delivery for local and international clients — balancing speed, quality, and brand voice across diverse industries.</p>
+        <ul class="exp-points">
+          <li>Drove a 30% increase in organic traffic for a multinational client through end-to-end SEO and content strategy, from keyword research to post-publication optimisation.</li>
+          <li>Managed content production across multiple concurrent client accounts, owning every stage from brief to performance review.</li>
+          <li>Conducted in-depth USP and competitor research to align content and messaging with audience needs and search demand.</li>
+          <li>Introduced AI-assisted workflows into content production, improving turnaround time while maintaining editorial quality.</li>
+          <li>Developed and maintained editorial calendars for blogs and resource content across diverse industries.</li>
+        </ul>
+        <div class="exp-impact">
+          <div class="exp-impact-label">Impact</div>
+          <p>Supported major digital campaigns with clear, consistent content that strengthened organic visibility and improved on-site engagement for international clients.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Singapore Swimming Club -->
+    <div class="exp-row">
+      <div class="exp-meta">
+        <div class="exp-company">Singapore Swimming Club</div>
+        <div class="exp-role">MarCom Executive</div>
+        <div class="exp-dates">Oct 2024 – Mar 2025</div>
+        <span class="exp-tag">In-House · Multi-Channel</span>
+      </div>
+      <div class="exp-body">
+        <p class="exp-lead">Member-facing communications across social, email, web, and print — creating a more consistent and engaging experience for the club's audience.</p>
+        <ul class="exp-points">
+          <li>Served as primary content owner across social, web, email, and print, writing and coordinating content while maintaining editorial consistency and publishing cadence.</li>
+          <li>Conducted an in-depth interview with decorated Paralympian Yip Pin Xiu, authoring a high-profile feature article for the club's bimonthly print magazine <em>SPLASH</em>.</li>
+          <li>Redesigned the club's content strategy and calendar, growing social media engagement by 60% across Facebook and Instagram.</li>
+          <li>Wrote and produced 26 member email campaigns annually via Mailchimp and SendGrid, managing copy, segmentation, and performance review.</li>
+          <li>Produced multimedia content for the Hitcheed vendor campaign, including visual slideshows and supporting social creative for the club's event booth.</li>
+        </ul>
+        <div class="exp-impact">
+          <div class="exp-impact-label">Impact</div>
+          <p>Increased audience engagement by 60% through more consistent, member-centric social content and EDMs. The Yip Pin Xiu feature became the club's most-read magazine piece that quarter.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Singtel -->
+    <div class="exp-row">
+      <div class="exp-meta">
+        <div class="exp-company">Singtel</div>
+        <div class="exp-role">Content Executive</div>
+        <div class="exp-dates">Apr 2023 – Apr 2024</div>
+        <span class="exp-tag">Corporate · SEO at Scale</span>
+      </div>
+      <div class="exp-body">
+        <p class="exp-lead">High-volume SEO content for Singapore's largest telco — simplifying mobile plans and consumer tech while improving discoverability and customer understanding.</p>
+        <ul class="exp-points">
+          <li>Produced and optimised SEO, advertorial, and campaign articles for consumer telco product launches, contributing to a 25% increase in organic traffic within 12 months.</li>
+          <li>Translated complex technical product information into clear, reader-first editorial content optimised for search intent.</li>
+          <li>Conducted hands-on product research for priority pieces, including an in-depth review of the Samsung Galaxy Z Flip5 before retail launch.</li>
+          <li>Led hero content from ideation through upload — including the blog's most-read article, a mobile plans guide for seniors that supported both education and acquisition.</li>
+          <li>Improved keyword rankings on priority product pages through systematic on-page optimisation and tracking in Google Search Console.</li>
+        </ul>
+        <div class="exp-impact">
+          <div class="exp-impact-label">Impact</div>
+          <p>25% traffic increase · 20% ranking improvement · 7% sales uplift. The seniors mobile plans article became a hero piece with lasting organic reach.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Smart Local -->
+    <div class="exp-row">
+      <div class="exp-meta">
+        <div class="exp-company">The Smart Local</div>
+        <div class="exp-role">Editorial Assistant</div>
+        <div class="exp-dates">Sep 2022 – Mar 2023</div>
+        <span class="exp-tag">Media · Lifestyle Editorial</span>
+      </div>
+      <div class="exp-body">
+        <p class="exp-lead">Lifestyle, finance, and food content for one of Singapore's largest digital publications — building strong instincts for tone, relevance, and audience appeal.</p>
+        <ul class="exp-points">
+          <li>Published 30+ editorial and sponsored articles, contributing to a 15% increase in site traffic over six months.</li>
+          <li>Independently managed research, on-ground site visits, writing, and publishing within the first month.</li>
+          <li>Pitched and developed story angles that balanced journalistic accuracy with engaging, accessible storytelling.</li>
+          <li>Coordinated and appeared on shoots for selected pieces, contributing to visually compelling, story-driven content.</li>
+          <li>Ensured all articles met SEO and readability best practices while maintaining the publication's distinctive voice.</li>
+        </ul>
+        <div class="exp-impact">
+          <div class="exp-impact-label">Impact</div>
+          <p>Several pieces ranked in the site's Top 10 articles of the month, including work on Rifle Range Nature Park, Christmas displays, and lifestyle-led features.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section test-bg" id="testimonials">
+  <div class="pink-rule"></div>
+  <div class="section-label">What People Say</div>
+  <div class="section-title">Praise from people<br><em style="font-style:italic;font-weight:400">who've seen my work up close.</em></div>
+  <div class="test-grid">
+    <div class="test-card">
+      <p class="test-quote">She demonstrates a deep understanding of keyword intent, on-page optimisation, and brand voice, allowing her to create content that not only meets strategic objectives but also resonates with readers.</p>
+      <p class="test-author">Judy Tay &amp; Abel Chan — First Page Digital</p>
+    </div>
+    <div class="test-card">
+      <p class="test-quote">She has shown a strong aptitude for writing lifestyle content, an area that even advanced writing tools struggle to replicate authentically.</p>
+      <p class="test-author">Reuben Lim — First Page Digital</p>
+    </div>
+    <div class="test-card">
+      <p class="test-quote">She demonstrated an ability to adapt her writing for challenging accounts that demanded unconventional and fun writing styles.</p>
+      <p class="test-author">Bryce K — First Page Digital</p>
+    </div>
+    <div class="test-card">
+      <p class="test-quote">Gabriella displays a high level of initiative and drive, often volunteering for projects and working hard to ensure quality work is produced.</p>
+      <p class="test-author">Jessica Fang — The Smart Local</p>
+    </div>
+  </div>
+  <div class="test-links">
+    <a href="https://drive.google.com/file/d/1ePTO6PrDxtgWjjf79zhwmbi2f5kNWOJL/view" target="_blank" class="test-link-btn">✦ View Testimonial</a>
+    <a href="https://www.linkedin.com/in/gabriella-nadine-315844166/details/recommendations/?detailScreenTabIndex=0" target="_blank" class="test-link-btn">View All on LinkedIn</a>
+    <a href="https://drive.google.com/file/d/1jW2c_x8FJOsXfAIvS66d8dY7_Chr3JhA/view" target="_blank" class="test-link-btn">✦ View Testimonial</a>
+  </div>
+</section>
+
+<!-- EDITORIAL WORK -->
+<section class="section editorial-bg" id="writing">
+  <div class="pink-rule"></div>
+  <div class="section-label">Selected Writing</div>
+  <div class="section-title">The work speaks<br><em style="font-style:italic;font-weight:400">for itself.</em></div>
+  <div class="editorial-grid">
+
+    <div class="ed-card">
+      <div class="ed-type">Agency SEO · First Page Digital</div>
+      <div class="ed-title">Client Work Samples</div>
+      <ul class="ed-items">
+        <li><a href="https://drive.google.com/file/d/1Q1F_CAp69DpZvTXD_0Gy6Sf-yJPnyq3K/view" target="_blank">Let's Talk Coochie: Why Breaking the Silence on Feminine Care Matters</a></li>
+        <li><a href="https://drive.google.com/file/d/1UYy_BdcgG6MLnRHYuhjGEX6RXPrB-lLN/view" target="_blank">What Is a Bank Run? Understanding How Panic Can Collapse a Bank</a></li>
+        <li><a href="https://drive.google.com/file/d/1Xh8TOx-JTv1Vl0sdLSh2vaj0h5cWy3eV/view" target="_blank">Wi-Fi 7: The Next Generation of Wireless for Enterprise Performance</a></li>
+        <li><a href="https://drive.google.com/file/d/1G1JefLqJw1gmAS5KXp7yW7O7x9R8PrZS/view" target="_blank">Speaker Showdown: The Battle of the Portable Powerhouses</a></li>
+      </ul>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-type">Consumer SEO · Singtel</div>
+      <div class="ed-title">Telco &amp; Tech Articles</div>
+      <ul class="ed-items">
+        <li><a href="https://www.singtel.com/personal/singtel-blog/singtel-senior-plans" target="_blank">Singtel Senior Plans: Mobile Plans for Seniors (hero piece)</a></li>
+        <li><a href="https://www.singtel.com/personal/singtel-blog/earbuds-vs-headphones-gaming" target="_blank">Should You Use Earbuds or Headphones for Gaming?</a></li>
+        <li><a href="https://www.singtel.com/personal/singtel-blog/asus-rog-ally-singapore" target="_blank">ASUS ROG Ally: What to Know Before You Buy</a></li>
+        <li><a href="https://www.singtel.com/personal/singtel-blog/tips-for-better-wifi" target="_blank">9 Easy Ways to Improve Weak WiFi at Home</a></li>
+      </ul>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-type">Print Editorial · Singapore Swimming Club</div>
+      <div class="ed-title">SPLASH Magazine</div>
+      <ul class="ed-items">
+        <li>Feature interview: Paralympian Yip Pin Xiu</li>
+        <li><a href="https://sswimclub.org.sg/magazines/splash-dec-2024-jan-2025/" target="_blank">SPLASH Dec 2024 / Jan 2025 edition</a></li>
+        <li><a href="https://sswimclub.org.sg/magazines/splash-feb-mar-2025/" target="_blank">SPLASH Feb / Mar 2025 edition</a></li>
+        <li><a href="https://sswimclub.org.sg/magazines/splash-apr-may-2025/" target="_blank">SPLASH Apr / May 2025 edition</a></li>
+      </ul>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-type">Lifestyle Editorial · The Smart Local</div>
+      <div class="ed-title">Platform Features</div>
+      <ul class="ed-items">
+        <li><a href="https://thesmartlocal.com/read/rifle-range-nature-park/" target="_blank">9 Things To Do At Rifle Range Nature Park</a></li>
+        <li><a href="https://thesmartlocal.com/read/iconic-moments-singapore-2022/" target="_blank">Iconic Moments in Singapore 2022</a></li>
+        <li><a href="https://thesmartlocal.com/read/studying-at-ite/" target="_blank">5 Things I Learnt From Studying At ITE</a></li>
+        <li><a href="https://thesmartlocal.com/read/hdb-void-decks-singapore/" target="_blank">8 Coolest HDB Void Decks In Singapore</a></li>
+      </ul>
+      <a href="https://thesmartlocal.com/read/author/gabriellabernard/" target="_blank" class="ed-view-all">View all articles →</a>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-type">Opinion &amp; Academic</div>
+      <div class="ed-title">Personal Writing</div>
+      <ul class="ed-items">
+        <li><a href="https://drive.google.com/file/d/1LZm5Y1w3HheNeGzndcisQGRTFzQ7yqqM/view" target="_blank">Twitter: The Passive Teacher — social media as informal learning</a></li>
+        <li><a href="https://gabytriestowrite.substack.com/p/how-i-love-being-a-woman" target="_blank">How I Love Being A Woman</a></li>
+        <li><a href="https://gabytriestowrite.substack.com/p/why-is-gen-z-obsessed-with-fame" target="_blank">Why Is Gen Z Obsessed With Fame?</a></li>
+        <li><a href="https://gabytriestowrite.substack.com/p/thank-god-slim-shady-is-finally-dead" target="_blank">Thank God Slim Shady Is Finally Dead</a></li>
+      </ul>
+      <a href="https://gabytriestowrite.substack.com" target="_blank" class="ed-view-all">Read the full blog →</a>
+    </div>
+
+    <div class="ed-card">
+      <div class="ed-type">Video &amp; Hosting</div>
+      <div class="ed-title">On-Screen Work</div>
+      <ul class="ed-items">
+        <li><a href="https://www.youtube.com/@officialnewsroom1760" target="_blank">Sip Back series — writer, editor &amp; host for youth perspectives episodes</a></li>
+        <li><a href="https://www.youtube.com/watch?v=Gw4-Irc0760" target="_blank">SAGO Balls challenge — hosted and edited short-form YouTube video</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACCOLADES -->
+<div class="accolade-bg">
+  <div class="pink-rule" style="margin:0 auto 16px"></div>
+  <div class="section-label">Certifications &amp; Awards</div>
+  <div class="section-title" style="margin-bottom:0;font-size:clamp(22px,3vw,32px)">Lifelong learner.</div>
+  <div class="accolade-pills">
+    <span class="accolade-pill">UNSW High Distinction in Writing</span>
+    <span class="accolade-pill">Google Analytics for Beginners</span>
+    <span class="accolade-pill">Foundations of Prompt Engineering</span>
+    <span class="accolade-pill">Predictive Project Management</span>
+    <span class="accolade-pill">Conflict Management &amp; Resolution</span>
+    <span class="accolade-pill">Effective Leadership Skills &amp; Strategies</span>
+    <span class="accolade-pill">Bachelor of Communications · SUSS (in progress)</span>
+    <span class="accolade-pill">Diploma in Mass Media &amp; Communications · SP</span>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-bg" id="contact">
+  <p class="contact-script">let's work together</p>
+  <h2 class="contact-title">Open to great<br>opportunities.</h2>
+  <p class="contact-sub">Currently available for Content Marketing, SEO, and Communications roles in Singapore. Let's make something worth reading.</p>
+  <div class="contact-actions">
+    <a href="mailto:gabriella.bernard@gmail.com" class="contact-btn primary">✦ Email Me</a>
+    <a href="https://www.linkedin.com/in/gabriella-nadine-315844166/" target="_blank" class="contact-btn">LinkedIn</a>
+  </div>
+  <p class="footer-note">gabriella.bernard@gmail.com &nbsp;·&nbsp; Singapore &nbsp;·&nbsp; +65 9139 9523</p>
+</section>
+
+<script>
+// ── CURSOR ──────────────────────────────────────────────
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+const sparks = ['✦','♡','✧','·'];
+let lastSpark = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top = my + 'px';
+  const now = Date.now();
+  if (now - lastSpark > 120) {
+    lastSpark = now;
+    const el = document.createElement('span');
+    el.className = 'spark';
+    el.textContent = sparks[Math.floor(Math.random() * sparks.length)];
+    el.style.left = (mx + (Math.random() - .5) * 20) + 'px';
+    el.style.top  = (my + (Math.random() - .5) * 20) + 'px';
+    el.style.color = Math.random() > .5 ? '#e0507a' : '#d4a0b4';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 750);
+  }
+});
+
+function animRing() {
+  rx += (mx - rx) * .12;
+  ry += (my - ry) * .12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a, button, .stat-card, .test-card, .ed-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.width = '18px'; cur.style.height = '18px'; });
+  el.addEventListener('mouseleave', () => { cur.style.width = '10px'; cur.style.height = '10px'; });
+});
+
+// ── NAV ─────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+
+// ── PARALLAX REFERENCES ──────────────────────────────────
+const heroContent  = document.getElementById('heroContent');
+const heroGlow     = document.querySelector('.hero-glow');
+const floatSparks  = document.querySelectorAll('.float-spark');
+const heroSection  = document.querySelector('.hero');
+const scrollHint   = document.querySelector('.scroll-hint');
+// Depth multipliers for each floating sparkle
+const sparkDepths  = [0.18, 0.32, 0.12, 0.28, 0.22, 0.38];
+
+// Section titles get a very gentle upward drift as you scroll past them
+const parallaxTitles = document.querySelectorAll('.section-title');
+
+// ── SCROLL-REVEAL SETUP ──────────────────────────────────
+// Add reveal class to every card / row / title
+const revealSelectors = [
+  '.stat-card',
+  '.exp-row',
+  '.test-card',
+  '.ed-card',
+  '.section-label',
+  '.section-title',
+  '.pink-rule',
+  '.accolade-pills',
+];
+revealSelectors.forEach(sel => {
+  document.querySelectorAll(sel).forEach((el, i) => {
+    el.classList.add('reveal');
+    // Stagger siblings within the same parent
+    const siblings = el.parentElement.querySelectorAll(sel.split('.')[1] ? '.' + sel.split('.')[1] : sel);
+    const idx = Array.from(siblings).indexOf(el);
+    if (idx > 0 && idx <= 5) el.classList.add(`reveal-d${idx}`);
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      // Unobserve after reveal so it doesn't flicker back
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── PARALLAX LOOP ────────────────────────────────────────
+let ticking = false;
+
+function onScroll() {
+  if (!ticking) {
+    requestAnimationFrame(runParallax);
+    ticking = true;
+  }
+}
+
+function runParallax() {
+  const y = window.scrollY;
+  const heroH = heroSection.offsetHeight;
+
+  // Only run hero parallax while hero is visible
+  if (y < heroH + 100) {
+    // Background glow drifts down slowly — creates sense it's "far away"
+    heroGlow.style.transform = `translateY(${y * 0.45}px)`;
+
+    // Hero content lifts upward faster + fades — feels like moving through it
+    heroContent.style.transform = `translateY(${y * 0.22}px)`;
+    heroContent.style.opacity = Math.max(0, 1 - y / (heroH * 0.65));
+
+    // Scroll hint fades quickly
+    scrollHint.style.opacity = Math.max(0, 1 - y / 180);
+
+    // Each floating sparkle moves at its own depth — creates layered 3-D feel
+    floatSparks.forEach((s, i) => {
+      s.style.transform = `translateY(${y * sparkDepths[i % sparkDepths.length]}px)`;
+    });
+  }
+
+  // Section title gentle upward drift — content feels like it's rising to meet you
+  parallaxTitles.forEach(title => {
+    const rect = title.getBoundingClientRect();
+    const viewH = window.innerHeight;
+    if (rect.top < viewH && rect.bottom > 0) {
+      const progress = (viewH - rect.top) / (viewH + rect.height);
+      title.style.transform = `translateY(${(progress - 0.5) * -28}px)`;
+    }
+  });
+
+  // Nav
+  nav.classList.toggle('scrolled', y > 60);
+
+  ticking = false;
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+// Run once on load
+runParallax();
+</script>
+</body>
+</html>
